@@ -1,17 +1,11 @@
 from flask import Flask, render_template, request
 import psycopg2
+import os
 
 app = Flask(__name__)
 
 def get_connection():
-    return psycopg2.connect(
-        host="localhost",
-        database="DemoHosting",
-        user="postgres",
-        password="riddhi1826"
-    )
-
-
+    return psycopg2.connect(os.environ.get("DATABASE_URL"))
 @app.route("/")
 def home():
     return render_template("login.html")
