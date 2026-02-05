@@ -4,8 +4,12 @@ import os
 
 app = Flask(__name__)
 
+
 def get_connection():
-    return psycopg2.connect(os.environ.get("DATABASE_URL"))
+    db_url = os.environ.get("DATABASE_URL")
+    return psycopg2.connect(db_url)
+
+
 @app.route("/")
 def home():
     return render_template("login.html")
@@ -32,8 +36,9 @@ def login():
     if user:
         return render_template("dashboard.html")
     else:
-        return " Invalid Login"
+        return "Invalid Login"
 
 
+#  debug remove karo
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
